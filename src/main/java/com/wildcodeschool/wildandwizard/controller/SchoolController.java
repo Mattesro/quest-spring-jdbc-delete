@@ -11,6 +11,16 @@ public class SchoolController {
 
     private SchoolRepository repository = new SchoolRepository();
 
+
+    @GetMapping("/school-Id")
+    public String getById(Model model, @RequestParam Long id) {
+
+    model.addAttribute("school", repository.findById(id));
+
+    return "school_get";
+    }
+
+
     @GetMapping("/school/delete")
     public String deleteWizard(@RequestParam Long id) {
 

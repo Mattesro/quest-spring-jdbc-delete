@@ -11,6 +11,16 @@ public class WizardController {
 
     private WizardRepository repository = new WizardRepository();
 
+
+    @GetMapping("/wizard-Id")
+    public String getById(Model model, @RequestParam Long id) {
+
+        model.addAttribute("wizard", repository.findById(id));
+
+        return "wizard_get";
+    }
+
+
     @GetMapping("/wizard/delete")
     public String deleteWizard(@RequestParam Long id) {
 

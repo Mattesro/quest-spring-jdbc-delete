@@ -13,6 +13,47 @@ public class WizardRepository {
     private final static String DB_USER = "h4rryp0tt3r";
     private final static String DB_PASSWORD = "Horcrux4life!";
 
+
+
+
+    public Wizard findById(Long id) {
+
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+          connection = DriverManager.getConnection(
+          DB_URL, DB_USER, DB_PASSWORD
+          );
+          statement = connection.prepareStatement(
+          "SELECT * FROM wizard WHERE id = ?;"
+          );
+          statement.setLong(1, id);
+          resultSet = statement.executeQuery();
+
+          if (resultSet.next()) {
+            String firstName = resultSet.getString("first_name");
+            String lastName = resultSet.getString("last_name");
+            Date birthday = resultSet.getDate("birthday");
+            String birthPlace = resultSet.getString("birth_place");
+            String biography = resultSet.getString("biography");
+            boolean muggle = resultSet.getBoolean("is_muggle");
+            return new Wizard(id, firstName, lastName, birthday, birthPlace, biography, muggle);
+          }
+        } catch (SQLException e) {
+          e.printStackTrace();
+        } finally {
+          JdbcUtils.closeResultSet(resultSet);
+          JdbcUtils.closeStatement(statement);
+          JdbcUtils.closeConnection(connection);
+        }
+        return null;
+      }
+
+
+
+
+
     public void deleteById(Long id) {
         Connection connection = null;
         PreparedStatement statement = null;

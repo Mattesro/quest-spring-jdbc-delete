@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Löschen der Schule</title>
+</head>
+<body>
+<a href="/">Go back</a>
+
+<section>
+    <h1>Löschen der Schule?</h1>
+    <ul>
+        <li th:text="|Id: ${school.id}|">$id</li>
+        <li th:text="|Name: ${school.name}|">$name</li>
+        <li th:text="|Capacity: ${school.capacity}|">$capacity</li>
+        <li th:text="|Country: ${school.country}|">$country</li>
+    </ul>
+
+    <form action="/school/delete" method="get">
+        <label>Löschen der Schule:</label>
+        <input type="hidden" name="id" th:value="${school.id}" >
+        <input type="submit" value=" Delete ">
+    </form>
+</section>
+
+<!-- placeholder="1" required type="text">
+
+
+    <input type="hidden" name="id" value="${school.id}" >
+
+value=$id
+-->
+
+<a href="/">Go back</a>
+</body>
+</html>
